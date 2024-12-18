@@ -1,13 +1,19 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.svg" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon-light.svg" media="(prefers-color-scheme: dark)" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/styles/global.css">
+  <script type="module" src="/src/components/home.js"></script>
+  <title>Console JS</title>
+</head>
+
+<body>
+  <home-component></home-component>
+  <noscript> <span>Necesitas habilitar JavaScript para usar este sitio.</span> </noscript>
+</body>
+
 </html>
