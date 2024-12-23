@@ -1,11 +1,11 @@
 class Home extends HTMLElement {
   constructor() {
-    super()
-    this.attachShadow({ mode: 'open' })
+    super();
+    this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
-    this.render()
+    this.render();
   }
 
   static get styles() {
@@ -13,7 +13,7 @@ class Home extends HTMLElement {
       h1 {
         color: red;
       }
-    `
+    `;
   }
 
   render() {
@@ -21,8 +21,8 @@ class Home extends HTMLElement {
     <style>${Home.styles}</style>
 
     <h1>Hello World!</h1>
-  `
+  `;
   }
 }
 
-customElements.define('home-component', Home)
+customElements.define('home-component', Home);
