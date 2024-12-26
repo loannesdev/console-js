@@ -1,7 +1,9 @@
+import "./InputCode.js";
+
 class Home extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -10,8 +12,10 @@ class Home extends HTMLElement {
 
   static get styles() {
     return /* css */`
-      h1 {
-        color: red;
+      :host {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100dvh;
       }
     `;
   }
@@ -20,9 +24,10 @@ class Home extends HTMLElement {
     this.shadowRoot.innerHTML = /* html */`
     <style>${Home.styles}</style>
 
-    <h1>Hello World!</h1>
+    <input-code></input-code>
+    <textarea style="background-color: var(--current-bg-color); color: var(--current-text-color); resize: none; border: 0px; outline: none; cursor-pointer: none;"></textarea>
   `;
   }
 }
 
-customElements.define('home-component', Home);
+customElements.define("home-wrapper", Home);

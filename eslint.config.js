@@ -8,6 +8,7 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       semi: ["error", "always"],
+      quotes: ["error", "double"],
     }
   },
 ];

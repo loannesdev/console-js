@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "console-js",
+        "title": "console js",
         "width": 800,
         "height": 600,
         "resizable": true,
