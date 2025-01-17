@@ -22,7 +22,6 @@ class InputCode extends HTMLElement {
           border: 0px;
           color: var(--color-text);
           padding: 6px;
-          position: relative;
           outline: none;
         }
       }

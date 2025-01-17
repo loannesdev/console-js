@@ -1,4 +1,5 @@
 import "./InputCode.js";
+import "./ResultCode.js";
 
 class Home extends HTMLElement {
   constructor() {
@@ -11,21 +12,31 @@ class Home extends HTMLElement {
   }
 
   static get styles() {
-    return /* css */`
+    return /* css */ `
       :host {
         display: grid;
         grid-template-columns: 1fr 1fr;
         height: 100dvh;
+
+        & .divider {
+          width: 320px;
+          background-color: color-mix(in srgb, transparent 80%, #fff);
+          height: 100%;
+
+          &:hover {
+            cursor: ew-resize;
+          }
+        }
       }
     `;
   }
 
   render() {
-    this.shadowRoot.innerHTML = /* html */`
+    this.shadowRoot.innerHTML = /* html */ `
     <style>${Home.styles}</style>
 
     <input-code></input-code>
-    <textarea style="background-color: var(--current-bg-color); color: var(--current-text-color); resize: none; border: 0px; outline: none; cursor-pointer: none;"></textarea>
+    <result-code></result-code>
   `;
   }
 }
