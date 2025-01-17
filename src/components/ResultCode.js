@@ -11,8 +11,8 @@ class ResultCode extends HTMLElement {
   static get styles() {
     return /* css */ `
       :host {
-        background-color: red;
-        
+        width: var(--width-result-window);
+
         & .console {
           width: 100%;
           height: 100%;

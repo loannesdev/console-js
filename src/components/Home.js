@@ -1,5 +1,6 @@
 import "./InputCode.js";
 import "./ResultCode.js";
+import "./WindowDivider.js";
 
 class Home extends HTMLElement {
   constructor() {
@@ -14,19 +15,12 @@ class Home extends HTMLElement {
   static get styles() {
     return /* css */ `
       :host {
+        --width-result-window: 1fr;
+        --bg: green;
+
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr auto var(--width-result-window);
         height: 100dvh;
-
-        & .divider {
-          width: 320px;
-          background-color: color-mix(in srgb, transparent 80%, #fff);
-          height: 100%;
-
-          &:hover {
-            cursor: ew-resize;
-          }
-        }
       }
     `;
   }
@@ -36,6 +30,7 @@ class Home extends HTMLElement {
     <style>${Home.styles}</style>
 
     <input-code></input-code>
+    <window-divider></window-divider>
     <result-code></result-code>
   `;
   }
