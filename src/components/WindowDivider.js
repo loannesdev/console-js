@@ -9,8 +9,6 @@ class WindowDivider extends HTMLElement {
 
     const divider = this.shadowRoot.querySelector(".divider");
     const homeWrapper = document.querySelector("home-wrapper");
-    const minWidth = 320;
-    const maxWidth = 1280;
 
     let isDragging = false;
 
@@ -28,8 +26,10 @@ class WindowDivider extends HTMLElement {
       if (!isDragging) return;
 
       const { clientX } = event;
-      const { width } = homeWrapper.getBoundingClientRect();
-      const resultWindowWidth = -(clientX - width);
+      const { width: windowWidth } = homeWrapper.getBoundingClientRect();
+      const minWidth = windowWidth * 0.2;
+      const maxWidth = windowWidth * 0.8;
+      const resultWindowWidth = -(clientX - windowWidth);
 
       if (resultWindowWidth <= minWidth || resultWindowWidth >= maxWidth) {
         return;
