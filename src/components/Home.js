@@ -1,4 +1,4 @@
-import "./InputCode.js";
+import "./CodeEditor.js";
 import "./ResultCode.js";
 import "./WindowDivider.js";
 
@@ -16,7 +16,6 @@ class Home extends HTMLElement {
     return /* css */ `
       :host {
         --width-result-window: 1fr;
-        --bg: green;
 
         display: grid;
         grid-template-columns: 1fr auto var(--width-result-window);
@@ -29,7 +28,7 @@ class Home extends HTMLElement {
     this.shadowRoot.innerHTML = /* html */ `
     <style>${Home.styles}</style>
 
-    <input-code></input-code>
+    <code-editor></code-editor>
     <window-divider></window-divider>
     <result-code></result-code>
   `;

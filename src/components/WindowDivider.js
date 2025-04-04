@@ -43,9 +43,9 @@ class WindowDivider extends HTMLElement {
     return /* css */ `
       :host {
         & .divider {
-          --size: 3px;
+          --size: 6px;
           --bg-color: color-mix(in srgb, transparent 90%, #fff);
-          --size-pads: calc(var(--size) * 0.4);
+          --size-pads: calc(var(--size) * 2);
           --cursor: auto;
 
           width: var(--size);
