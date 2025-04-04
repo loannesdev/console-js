@@ -82,7 +82,7 @@ class InputCode extends HTMLElement {
       :host {
         & .input-code {
           min-height: 100%;
-          overflow: auto;
+          width: calc(100dvw - var(--width-result-window));
         }
       }
     `;
@@ -96,7 +96,6 @@ class InputCode extends HTMLElement {
     </style>
 
     <div class="input-code"></div>
-    <iframe id="sandbox" hidden></iframe>
   `;
   }
 }

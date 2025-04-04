@@ -56,7 +56,7 @@ class WindowDivider extends HTMLElement {
           cursor: var(--cursor);
 
           &:is(:hover, ::before:hover, ::after:hover) {
-            --cursor: ew-resize;
+            --cursor: col-resize;
             --bg-color: #09f;
           }
 

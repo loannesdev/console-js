@@ -15,11 +15,10 @@ class Home extends HTMLElement {
   static get styles() {
     return /* css */ `
       :host {
-        --width-result-window: 1fr;
-
         display: grid;
         grid-template-columns: 1fr auto var(--width-result-window);
         height: 100dvh;
+        overflow: hidden;
       }
     `;
   }
