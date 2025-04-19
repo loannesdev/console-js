@@ -18,6 +18,10 @@ class InputCode extends HTMLElement {
   initEditor() {
     const mainDOM = getComputedStyle(document.documentElement);
     const currentBgColor = mainDOM.getPropertyValue("--current-bg-color");
+    const codeFontSize = mainDOM.getPropertyValue("--code-font-size");
+    const inputCode = this.shadowRoot.querySelector(".input-code");
+    const codePadding = mainDOM.getPropertyValue("--code-padding");
+    let timer = null;
 
     self.MonacoEnvironment = {
       getWorker(_, label) {
@@ -38,12 +42,10 @@ class InputCode extends HTMLElement {
       }
     });
 
-    const inputCode = this.shadowRoot.querySelector(".input-code");
-
     this.editorInstance = editor.create(inputCode, {
       value: "",
       language: "typescript",
-      fontSize: "18px",
+      fontSize: codeFontSize,
       minimap: { enabled: false },
       tabSize: 2,
       fontLigatures: true,
@@ -58,22 +60,38 @@ class InputCode extends HTMLElement {
       },
       automaticLayout: true,
       placeholder: "Escribe tu código aquí...",
+      padding: {
+        top: `${codePadding}`,
+        bottom: `${codePadding}`,
+        left: `${codePadding}`,
+        right: `${codePadding}`,
+      },
     });
 
     this.editorInstance.focus();
 
-    let timer = null;
-    const event = new CustomEvent("value-change", { detail: { textValue: "" } });
-
     if (this.editorInstance) {
-      this.editorInstance.onDidChangeModelContent(() => {
-        clearTimeout(timer);
+      const event = new CustomEvent("value-change", { detail: { textValue: "" } });
+      let isFirstExecution = true;
 
-        timer = setTimeout(() => {
+      this.editorInstance.onDidChangeModelLanguageConfiguration(() => {
+        if (isFirstExecution) {
           event.detail.textValue = this.editorInstance.getValue();
           this.dispatchEvent(event);
-        }, 400);
+          isFirstExecution = false;
+        }
       });
+
+      this.editorInstance.onDidChangeModelContent(() => {
+        clearTimeout(timer);
+        event.detail.textValue = this.editorInstance.getValue();
+
+        timer = setTimeout(() => {
+          this.dispatchEvent(event);
+        }, 200);
+      });
+
+      this.dispatchEvent(event);
     }
   }
 

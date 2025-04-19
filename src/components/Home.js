@@ -16,7 +16,7 @@ class Home extends HTMLElement {
     return /* css */ `
       :host {
         display: grid;
-        grid-template-columns: 1fr auto var(--width-result-window);
+        grid-template-columns: 1.2fr auto var(--width-result-window);
         height: 100dvh;
         overflow: hidden;
       }
