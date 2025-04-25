@@ -73,7 +73,7 @@ class ResultCode extends HTMLElement {
     });
 
     window.addEventListener("message", (event) => {
-      if (!event.data.length) {
+      if (!event?.data?.length) {
         return;
       }
 
