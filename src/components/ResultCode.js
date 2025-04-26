@@ -1,4 +1,4 @@
-class ResultCode extends HTMLElement {
+class CodeResult extends HTMLElement {
   constructor() {
     super();
     this.sandboxElement = null;
@@ -91,7 +91,7 @@ class ResultCode extends HTMLElement {
 
   static get styles() {
     return /* css */ `
-      :host, result-code {
+      :host, code-result {
         width: var(--width-result-window);
 
         & .console {
@@ -111,7 +111,7 @@ class ResultCode extends HTMLElement {
 
   render() {
     this.innerHTML = /* html */ `
-      <style>${ResultCode.styles}</style>
+      <style>${CodeResult.styles}</style>
 
       <pre class="console"></pre>
       <iframe id="sandbox" hidden></iframe>
@@ -119,4 +119,4 @@ class ResultCode extends HTMLElement {
   }
 }
 
-customElements.define("result-code", ResultCode);
+customElements.define("code-result", CodeResult);

@@ -29,7 +29,7 @@ class Home extends HTMLElement {
 
     <code-editor></code-editor>
     <window-divider></window-divider>
-    <result-code></result-code>
+    <code-result></code-result>
   `;
   }
 }
