@@ -66,6 +66,8 @@ class InputCode extends HTMLElement {
         left: `${codePadding}`,
         right: `${codePadding}`,
       },
+      wordWrap: "on",
+      wordWrapColumn: 80,
     });
 
     this.editorInstance.focus();

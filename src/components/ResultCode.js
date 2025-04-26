@@ -95,12 +95,17 @@ class ResultCode extends HTMLElement {
       :host {
         width: var(--width-result-window);
 
-        & .console {
-          width: 100%;
-          height: 100%;
+        & .console { 
           margin: 0;
           font-size: var(--code-font-size);
           padding: var(--code-padding);
+          white-space: pre-wrap;
+          scrollbar-width: auto;
+          scrollbar-color: gray var(--current-bg-color);
+          word-break: break-all;
+          overflow: auto;
+          height: 100dvh;
+          box-sizing: border-box;
         }
       }
     `;
@@ -108,11 +113,11 @@ class ResultCode extends HTMLElement {
 
   render() {
     this.shadowRoot.innerHTML = /* html */ `
-    <style>${ResultCode.styles}</style>
+      <style>${ResultCode.styles}</style>
 
-    <pre class="console"></pre>
-    <iframe id="sandbox" hidden></iframe>
-  `;
+      <pre class="console"></pre>
+      <iframe id="sandbox" hidden></iframe>
+    `;
   }
 }
 
