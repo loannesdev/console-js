@@ -5,7 +5,6 @@ import "./WindowDivider.js";
 class Home extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -14,17 +13,18 @@ class Home extends HTMLElement {
 
   static get styles() {
     return /* css */ `
-      :host {
+      :host, home-wrapper {
         display: grid;
         grid-template-columns: 1.2fr auto var(--width-result-window);
         height: 100dvh;
+        width: 100dvw;
         overflow: hidden;
       }
     `;
   }
 
   render() {
-    this.shadowRoot.innerHTML = /* html */ `
+    this.innerHTML = /* html */ `
     <style>${Home.styles}</style>
 
     <code-editor></code-editor>

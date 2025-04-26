@@ -1,7 +1,6 @@
 class ResultCode extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
     this.sandboxElement = null;
     this.sandboxContent = null;
   }
@@ -13,7 +12,7 @@ class ResultCode extends HTMLElement {
   }
 
   initSandbox() {
-    this.sandboxElement = this.shadowRoot.querySelector("iframe#sandbox");
+    this.sandboxElement = this.querySelector("iframe#sandbox");
     this.sandboxContent = this.sandboxElement.contentDocument || this.sandboxElement.contentWindow.document;
 
     this.sandboxContent.open();
@@ -32,8 +31,8 @@ class ResultCode extends HTMLElement {
   }
 
   codeExecution() {
-    const codeEditor = document.querySelector("home-wrapper").shadowRoot.querySelector("code-editor");
-    const consoleElement = this.shadowRoot.querySelector(".console");
+    const codeEditor = document.querySelector("home-wrapper").querySelector("code-editor");
+    const consoleElement = this.querySelector(".console");
     let arrayResult = [];
 
     codeEditor.addEventListener("value-change", (event) => { // Custom event
@@ -86,16 +85,20 @@ class ResultCode extends HTMLElement {
         arrayResult.push(event.data);
       }
 
+      console.log(arrayResult);
+      console.log(consoleElement);
+
+
       consoleElement.textContent = arrayResult.join("\n\n");
     });
   }
 
   static get styles() {
     return /* css */ `
-      :host {
+      :host, result-code {
         width: var(--width-result-window);
 
-        & .console { 
+        & .console {
           margin: 0;
           font-size: var(--code-font-size);
           padding: var(--code-padding);
@@ -105,14 +108,13 @@ class ResultCode extends HTMLElement {
           word-break: break-all;
           overflow: auto;
           height: 100dvh;
-          box-sizing: border-box;
         }
       }
     `;
   }
 
   render() {
-    this.shadowRoot.innerHTML = /* html */ `
+    this.innerHTML = /* html */ `
       <style>${ResultCode.styles}</style>
 
       <pre class="console"></pre>

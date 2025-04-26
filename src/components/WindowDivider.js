@@ -1,13 +1,12 @@
 class WindowDivider extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
     this.render();
 
-    const divider = this.shadowRoot.querySelector(".divider");
+    const divider = this.querySelector(".divider");
     const homeWrapper = document.querySelector("home-wrapper");
 
     let isDragging = false;
@@ -41,7 +40,7 @@ class WindowDivider extends HTMLElement {
 
   static get styles() {
     return /* css */ `
-      :host {
+      :host, window-divider {
         & .divider {
           --size: 6px;
           --bg-color: color-mix(in srgb, transparent 90%, #fff);
@@ -81,7 +80,7 @@ class WindowDivider extends HTMLElement {
   }
 
   render() {
-    this.shadowRoot.innerHTML = /* html */ `
+    this.innerHTML = /* html */ `
     <style>${WindowDivider.styles}</style>
 
     <div class="divider"></div>
