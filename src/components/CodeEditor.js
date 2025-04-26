@@ -7,11 +7,14 @@ class InputCode extends HTMLElement {
   constructor() {
     super();
     this.editorInstance = null;
+    this.backupKey = "code-backup";
+    this.backupCode = localStorage.getItem(this.backupKey) || "";
   }
 
   connectedCallback() {
     this.render();
     this.initEditor();
+    this.getBackupCode();
   }
 
   initEditor() {
@@ -42,7 +45,7 @@ class InputCode extends HTMLElement {
     });
 
     this.editorInstance = editor.create(inputCode, {
-      value: "",
+      value: this.backupCode,
       language: "typescript",
       fontSize: codeFontSize,
       minimap: { enabled: false },
@@ -94,6 +97,12 @@ class InputCode extends HTMLElement {
 
       this.dispatchEvent(event);
     }
+  }
+
+  getBackupCode() {
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem(this.backupKey, this.editorInstance.getValue());
+    });
   }
 
   static get styles() {
