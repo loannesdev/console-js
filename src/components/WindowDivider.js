@@ -1,13 +1,18 @@
 class WindowDivider extends HTMLElement {
   constructor() {
     super();
+    this.homeElement = null;
   }
 
   connectedCallback() {
     this.render();
+    this.calculatePosition();
+    this.recalculatePositionOnResize();
+  }
 
+  calculatePosition() {
     const divider = this.querySelector(".divider");
-    const homeWrapper = document.querySelector("home-wrapper");
+    this.homeElement = document.querySelector("home-wrapper");
 
     let isDragging = false;
 
@@ -25,7 +30,7 @@ class WindowDivider extends HTMLElement {
       if (!isDragging) return;
 
       const { clientX } = event;
-      const { width: windowWidth } = homeWrapper.getBoundingClientRect();
+      const { width: windowWidth } = this.homeElement.getBoundingClientRect();
       const minWidth = windowWidth * 0.2;
       const maxWidth = windowWidth * 0.8;
       const resultWindowWidth = -(clientX - windowWidth);
@@ -34,8 +39,29 @@ class WindowDivider extends HTMLElement {
         return;
       }
 
-      homeWrapper.style.setProperty("--width-result-window", `${resultWindowWidth}px`);
+      this.homeElement.style.setProperty("--width-result-window", `${resultWindowWidth}px`);
     });
+  }
+
+  recalculatePositionOnResize() {
+    const resizeElement = this.homeElement;
+    const widthCodeWindow = getComputedStyle(document.documentElement).getPropertyValue("--width-code-window").replace(/[a-zA-Z]/g, "");
+    let isfirstRender = true;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (isfirstRender) {
+        isfirstRender = false;
+        return;
+      }
+
+      const [entry] = entries;
+      const { width } = entry.contentRect;
+      const widthResultWindow = width / (Number(widthCodeWindow) + 1);
+
+      this.homeElement.style.setProperty("--width-result-window", `${widthResultWindow}px`);
+    });
+
+    resizeObserver.observe(resizeElement);
   }
 
   static get styles() {

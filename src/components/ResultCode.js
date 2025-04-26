@@ -85,10 +85,6 @@ class ResultCode extends HTMLElement {
         arrayResult.push(event.data);
       }
 
-      console.log(arrayResult);
-      console.log(consoleElement);
-
-
       consoleElement.textContent = arrayResult.join("\n\n");
     });
   }
