@@ -1,5 +1,5 @@
 import "./CodeEditor.js";
-import "./ResultCode.js";
+import "./CodeResult.js";
 import "./WindowDivider.js";
 
 class Home extends HTMLElement {
