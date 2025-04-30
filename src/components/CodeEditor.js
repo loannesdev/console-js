@@ -21,7 +21,7 @@ class InputCode extends HTMLElement {
     const mainDOM = getComputedStyle(document.documentElement);
     const currentBgColor = mainDOM.getPropertyValue("--current-bg-color");
     const codeFontSize = mainDOM.getPropertyValue("--code-font-size");
-    const inputCode = this.querySelector(".input-code");
+    const inputCode = this.querySelector(".editor");
     const codePadding = mainDOM.getPropertyValue("--code-padding");
     let timer = null;
 
@@ -70,6 +70,7 @@ class InputCode extends HTMLElement {
       },
       wordWrap: "on",
       wordWrapColumn: 80,
+      contextmenu: false,
     });
 
     this.editorInstance.focus();
@@ -108,7 +109,7 @@ class InputCode extends HTMLElement {
   static get styles() {
     return /* css */`
       :host, code-editor {
-        & .input-code {
+        & .editor {
           min-height: 100%;
           width: calc(100dvw - var(--width-result-window));
         }
@@ -123,7 +124,7 @@ class InputCode extends HTMLElement {
       ${editorStyles}
     </style>
 
-    <div class="input-code"></div>
+    <div class="editor"></div>
   `;
   }
 }
