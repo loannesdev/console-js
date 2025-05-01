@@ -34,6 +34,7 @@ class CodeResult extends HTMLElement {
     const codeEditor = document.querySelector("home-wrapper").querySelector("code-editor");
     const consoleElement = this.querySelector(".console");
     let arrayResult = [];
+    const pathOrigin = location.origin;
 
     codeEditor.addEventListener("value-change", (event) => { // Custom event
       const { detail: { textValue } } = event;
@@ -45,7 +46,7 @@ class CodeResult extends HTMLElement {
         scriptElement.remove(); // Remove old script element
       }
 
-      if (!textValue.length) { // If the text value is empty, clear the console
+      if (!textValue.length || !textValue.includes("console.log")) { // If the text value is empty or is not a console.log clear the console
         consoleElement.textContent = "";
       }
 
@@ -54,8 +55,8 @@ class CodeResult extends HTMLElement {
         // Get the console object & set the log message to the parent window ---
         const originalLog = console.log;
 
-          console.log = (message) => {
-          window.parent.postMessage(message, "*");
+        console.log = (message) => {
+          window.parent.postMessage({ message }, "${pathOrigin}");
         };
         // ---
 
@@ -72,20 +73,29 @@ class CodeResult extends HTMLElement {
     });
 
     window.addEventListener("message", (event) => {
-      if (!event?.data?.length) {
+      if (event.origin !== pathOrigin) {
         return;
       }
 
-      if (typeof event.data === "object") {
-        const json = JSON.stringify(event.data, null, 2);
-        arrayResult.push(json);
+      const consoleValues = event?.data?.message;
+
+      if (consoleValues) {
+        if (typeof consoleValues === "object") {
+          const json = JSON.stringify(consoleValues, null, 2);
+          arrayResult.push(json);
+        }
+
+        else {
+          arrayResult.push(consoleValues);
+        }
+
+        consoleElement.textContent = arrayResult.join("\n\n");
+        return;
       }
 
-      else {
-        arrayResult.push(event.data);
+      if (!consoleValues && !arrayResult.filter(Boolean).length) {
+        consoleElement.textContent = "";
       }
-
-      consoleElement.textContent = arrayResult.join("\n\n");
     });
   }
 
